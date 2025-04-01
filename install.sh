@@ -187,8 +187,16 @@ install_kind() {
         echo "Falha ao instalar o Kind. Por favor, instale manualmente."
         exit 1
     fi
-
-    echo "Kind instalado com sucesso!"
+    
+    # Teste real para verificar se o Kind está funcionando corretamente
+    echo "🔍 Verificando a instalação do Kind..."
+    if ! kind version &> /dev/null; then
+        echo "❌ Kind está instalado, mas não está funcionando corretamente."
+        echo "Por favor, verifique se há erros na instalação ou reinstale manualmente."
+        exit 1
+    fi
+    
+    echo "✅ Kind instalado e funcionando corretamente!"
 }
 
 # Função para instalar Kubectl
@@ -220,13 +228,15 @@ install_kubectl() {
         exit 1
     fi
 
-    # Verificar a instalação
-    if ! command -v kubectl &> /dev/null; then
-        echo "Falha ao instalar o Kubectl. Por favor, instale manualmente."
+    # Teste real para verificar se o Kubectl está funcionando corretamente
+    echo "🔍 Verificando a instalação do Kubectl..."
+    if ! kubectl version --client &> /dev/null; then
+        echo "❌ Kubectl está instalado, mas não está funcionando corretamente."
+        echo "Por favor, verifique se há erros na instalação ou reinstale manualmente."
         exit 1
     fi
-
-    echo "Kubectl instalado com sucesso!"
+    
+    echo "✅ Kubectl instalado e funcionando corretamente!"
 }
 
 # Função para verificar se o Docker está em execução
